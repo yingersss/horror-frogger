@@ -1,0 +1,31 @@
+# === Unity ===
+[Ll]ibrary/
+[Tt]emp/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Oo]bj/
+MemoryCaptures/
+UserSettings/
+
+# === Visual Studio ===
+.vs/
+*.csproj
+*.sln
+*.user
+*.unityproj
+*.pidb
+*.booproj
+*.svd
+
+# === OS Files ===
+.DS_Store
+Thumbs.db
+
+# === Package Manager Cache ===
+Packages/com.unity.package-manager-ui/
+Packages/manifest.json.meta
+Packages/packages-lock.json.meta
+
+# === Collab Cache ===
+CollabCache/
