@@ -3,25 +3,22 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+
 public class Frogger : MonoBehaviour
 {
+    private bool isInvulnerable = false;
 
     private SpriteRenderer spriteRenderer;
+    private HeartManager heartManager;
     public Sprite idleSprite;
     public Sprite leapSprite;
     public Sprite deadSprite;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        heartManager = FindFirstObjectByType<HeartManager>();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
@@ -56,23 +53,32 @@ public class Frogger : MonoBehaviour
         Collider2D barrier = Physics2D.OverlapBox(destination, Vector2.zero, 0, LayerMask.GetMask("Barrier")); // check if there is a collider at the destination
         Collider2D platform = Physics2D.OverlapBox(destination, Vector2.zero, 0, LayerMask.GetMask("Platform"));
         Collider2D obstacle = Physics2D.OverlapBox(destination, Vector2.zero, 0, LayerMask.GetMask("Obstacle"));
+        Collider2D water = Physics2D.OverlapBox(destination, Vector2.zero, 0, LayerMask.GetMask("Water"));
 
         if (barrier != null) return; // if there is a collider, do not move
+
 
         if (platform != null) // if there is a platform, set the frog as a child of the platform so it moves with it
             transform.SetParent(platform.transform);
         else
             transform.SetParent(null);
 
-        if (obstacle != null && platform == null)
+        if (obstacle != null && platform == null && !isInvulnerable) // if there is an obstacle and no platform, the frog takes damage
         {
             transform.position = destination; // move the frog to the destination
-            Death(); // froggy goes poof
+            TakeDamage();
+            return;
         }
-        else
+
+        if (water != null && platform == null) // if the frog is in water and not on a platform, death
         {
-            StartCoroutine(Leap(destination)); // start the leap coroutine to move the frog smoothly to the destination
+            transform.position = destination;
+            heartManager.setHealth(0);
+            Death();
+            return;
         }
+
+        StartCoroutine(Leap(destination)); // start the leap coroutine to move the frog smoothly to the destination
 
     }
 
@@ -104,7 +110,24 @@ public class Frogger : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (enabled && other.gameObject.layer == LayerMask.NameToLayer("Obstacle") && transform.parent == null)
+        if (enabled && other.gameObject.layer == LayerMask.NameToLayer("Obstacle") && transform.parent == null && !isInvulnerable)
+        {
+            TakeDamage();
+        }
+    }
+
+    private void TakeDamage()
+    {
+        heartManager.takeDamage();
+        if (heartManager.health <= 0)
             Death();
+        StartCoroutine(InvulnerabilityCoroutine());
+    }
+
+    private IEnumerator InvulnerabilityCoroutine()
+    {
+        isInvulnerable = true;
+        yield return new WaitForSeconds(0.1f); // Adjust duration as needed
+        isInvulnerable = false;
     }
 }

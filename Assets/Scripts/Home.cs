@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Home : MonoBehaviour
 {
-    public GameObject frog; // Assign this in the Unity Editor
+    public GameObject frog;
     
     private void OnEnable()
     {
