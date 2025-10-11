@@ -8,12 +8,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Frog
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Platform
+  - Obstacle
+  - Barrier
   - 
   - 
   - 
@@ -46,6 +46,12 @@ TagManager:
     locked: 0
   - name: 2
     uniqueID: 610719833
+    locked: 0
+  - name: 3
+    uniqueID: 3242456221
+    locked: 0
+  - name: 4
+    uniqueID: 1727552641
     locked: 0
   m_RenderingLayers:
   - Default

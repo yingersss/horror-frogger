@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5252669134493647670}
   - component: {fileID: 6807022061754167135}
   - component: {fileID: 6974770709552811165}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HomeFrog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,8 @@ GameObject:
   - component: {fileID: 3658069979982692703}
   - component: {fileID: 2762128258379090404}
   - component: {fileID: 5948503817950613187}
-  m_Layer: 0
+  - component: {fileID: 3844145008397361292}
+  m_Layer: 6
   m_Name: Home
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,3 +276,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &3844145008397361292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8265683858026930760}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fb36abcfaa7d0947a54ecc74d6f0f76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Home
+  frog: {fileID: 4049659839204686049}
