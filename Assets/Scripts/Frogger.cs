@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using NUnit.Framework;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -15,6 +16,7 @@ public class Frogger : MonoBehaviour
     public Sprite idleSprite;
     public Sprite leapSprite;
     public Sprite deadSprite;
+    public Sprite hurtSprite;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -126,9 +128,14 @@ public class Frogger : MonoBehaviour
 
     private void TakeDamage()
     {
+        isJumping = false; // make sure frog can move again
         heartManager.takeDamage();
         if (heartManager.health <= 0)
+        {
             Death();
+            return;
+        }
+        StartCoroutine(DamageFeedback());
         StartCoroutine(InvulnerabilityCoroutine());
     }
 
@@ -138,4 +145,16 @@ public class Frogger : MonoBehaviour
         yield return new WaitForSeconds(0.1f); // Adjust duration as needed
         isInvulnerable = false;
     }
+
+    private IEnumerator DamageFeedback()
+{
+    spriteRenderer.sprite = hurtSprite; // show hurt sprite
+    float duration = 0.25f; // how long to show the hurt sprite
+    yield return new WaitForSeconds(duration);
+
+    // Only revert to idle if not dead and not leaping
+    if (enabled && spriteRenderer.sprite != deadSprite)
+        spriteRenderer.sprite = idleSprite;
+}
+
 }
