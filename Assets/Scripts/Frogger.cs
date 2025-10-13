@@ -10,6 +10,8 @@ public class Frogger : MonoBehaviour
 {
     private bool isInvulnerable = false;
     private bool isJumping = false;
+    private float damageCooldown = 1f;
+    private float lastDamageTime = 0f;
 
     private SpriteRenderer spriteRenderer;
     private HeartManager heartManager;
@@ -118,11 +120,26 @@ public class Frogger : MonoBehaviour
         enabled = false; // disable the script so the frog cannot move anymore
     }
     
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
-        if (enabled && other.gameObject.layer == LayerMask.NameToLayer("Obstacle") && transform.parent == null && !isInvulnerable)
+        int layer = other.gameObject.layer;
+
+        // Skip conditions if
+        if (!enabled) return;
+        if (transform.parent != null) return; // ignore if riding a platform
+
+        bool isEnemyOrObstacle = 
+            layer == LayerMask.NameToLayer("Enemy") || 
+            layer == LayerMask.NameToLayer("Obstacle");
+
+        if (isEnemyOrObstacle)
         {
-            TakeDamage();
+            // Time-based cooldown check
+            if (Time.time - lastDamageTime >= damageCooldown)
+            {
+                TakeDamage();
+                lastDamageTime = Time.time; // reset cooldown
+            }
         }
     }
 
