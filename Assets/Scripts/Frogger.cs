@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,6 +8,7 @@ using UnityEngine.UIElements;
 public class Frogger : MonoBehaviour
 {
     private bool isInvulnerable = false;
+    private bool isJumping = false;
 
     private SpriteRenderer spriteRenderer;
     private HeartManager heartManager;
@@ -21,30 +23,35 @@ public class Frogger : MonoBehaviour
 
     void Update()
     {
+        if (isJumping) return;
+
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            Move(Vector3.up);
-            Console.WriteLine("W key was pressed");
+            Jump(Vector3.up, Quaternion.Euler(0, 0, 0));
+            return;
         }
         else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            transform.rotation = Quaternion.Euler(0, 0, -270);
-            Move(Vector3.left);
-            Console.WriteLine("A key was pressed");
+            Jump(Vector3.left, Quaternion.Euler(0, 0, -270));
+            return;
         }
         else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-            transform.rotation = Quaternion.Euler(0, 0, -180);
-            Move(Vector3.down);
-            Console.WriteLine("S key was pressed");
+            Jump(Vector3.down, Quaternion.Euler(0, 0, -180));
+            return;
         }
         else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            transform.rotation = Quaternion.Euler(0, 0, -90);
-            Move(Vector3.right);
-            Console.WriteLine("D key was pressed");
+            Jump(Vector3.right, Quaternion.Euler(0, 0, -90));
+            return;
         }
+    }
+    
+    private void Jump(Vector3 direction, Quaternion rotation) {
+
+        isJumping = true;
+        transform.rotation = rotation;
+        Move(direction);
     }
 
     private void Move(Vector3 direction)
@@ -99,7 +106,8 @@ public class Frogger : MonoBehaviour
 
         transform.position = destination; // final position is set to the destination so where frog will end up
         spriteRenderer.sprite = idleSprite;
-
+        isJumping = false;
+        Debug.Log($" isJumping is: {isJumping}");
     }
     private void Death()
     {
