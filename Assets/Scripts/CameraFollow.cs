@@ -1,12 +1,13 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform target;
+    public Transform target;          // Player
     public float followSpeed = 5f;
     private bool isTransitioning = false;
 
+    /*
     void LateUpdate()
     {
         if (!isTransitioning && target != null)
@@ -15,11 +16,12 @@ public class CameraFollow : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, targetPos, followSpeed * Time.deltaTime);
         }
     }
-    
+    */
+
     public IEnumerator MoveCameraTo(Vector3 destination, float duration)
-	{
+    {
         isTransitioning = true;
-		Vector3 startPos = transform.position;
+        Vector3 startPos = transform.position;
         float elapsed = 0f;
 
         while (elapsed < duration)
@@ -31,5 +33,5 @@ public class CameraFollow : MonoBehaviour
 
         transform.position = destination;
         isTransitioning = false;
-	}
+    }
 }
