@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class Home : MonoBehaviour
 {
-    public GameObject frog;
+    // public GameObject frog;
     
     private void OnEnable()
     {
-        frog.SetActive(true);
+       // frog.SetActive(true);
     }
     
     private void OnDisable()
     {
-        frog.SetActive(false);
+        // frog.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
