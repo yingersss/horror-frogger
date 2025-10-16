@@ -66,9 +66,11 @@ public class Frogger : MonoBehaviour
         Collider2D obstacle = Physics2D.OverlapBox(destination, Vector2.zero, 0, LayerMask.GetMask("Obstacle"));
         Collider2D water = Physics2D.OverlapBox(destination, Vector2.zero, 0, LayerMask.GetMask("Water"));
 
-        if (barrier != null) return; // if there is a collider, do not move
-
-
+        if (barrier != null)
+        {
+            isJumping = false; // make sure frog can move again
+            return; // if there is a collider, do not move
+        }
         if (platform != null) // if there is a platform, set the frog as a child of the platform so it moves with it
             transform.SetParent(platform.transform);
         else

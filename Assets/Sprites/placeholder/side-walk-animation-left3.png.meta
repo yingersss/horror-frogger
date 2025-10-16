@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0ffabef780d12be4da10cd17a639713d
+guid: da0abdef6abb76543a7b9f3591783b48
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3504566316590784757
-    second: Log 2_0
+      213: 2676827650848942499
+    second: side-walk-animation-left3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,12 +46,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Log 2_0
+      name: side-walk-animation-left3_0
       rect:
         serializedVersion: 2
-        x: 22
-        y: 23
-        width: 23
-        height: 16
+        x: 7
+        y: 1
+        width: 20
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5f061383f78b2a030800000000000000
-      internalID: 3504566316590784757
+      spriteID: 3a96bc5e090062520800000000000000
+      internalID: 2676827650848942499
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Log 2_0: 3504566316590784757
+      side-walk-animation-left3_0: 2676827650848942499
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
